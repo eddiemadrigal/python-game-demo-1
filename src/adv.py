@@ -46,15 +46,35 @@ while True:
         4. Narrow
         5. Treasure
         """).lower().strip()
+        print(Player(char_name))
         if room_number == "1":
             char_room = room["outside"]
             print(char_room)
-            new_room = input("Go to foyer? (y/n)")
-            if new_room == "y":
-                char_room = room["foyer"]
+            new_room = input("Go [n]orth [s]outh [e]ast [west]").lower().strip()
+            if new_room == "n":
+                char_room = room["outside"].n_to  # foyer
                 print(char_room)
+            else:
+                while new_room != "n":
+                    new_room = input("Go [n]orth [s]outh [e]ast [west]").lower().strip()
+                    if new_room == "n":
+                        char_room = room["outside"].n_to  # foyer
+                        print(char_room)
         elif room_number == "2":
-            print(room["foyer"])
+            char_room = room["foyer"]
+            print(char_room)
+            new_room = input("""
+        Please select a room number to enter from 1 - 3:
+        1. Outsidey
+        2. Overlook
+        3. Narrow
+            """)
+            if new_room == "1":
+                char_room = room['foyer'].s_to # to outside
+                print(char_room)
+            elif new_room == "2":
+                char_room = room['foyer'].n_to # to overlook
+                print(char_room)
         elif room_number == "3":
             print(room["overlook"])
         elif room_number == "4":
