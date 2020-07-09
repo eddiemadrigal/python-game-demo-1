@@ -1,3 +1,4 @@
+import sys
 from room import Room
 from player import Player
 
@@ -34,55 +35,169 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+
+def quit():
+    sys.exit()
+
+def outside_room():
+    char_room = room["outside"]
+    print(char_room)
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    if new_room == "n":
+        char_room = room["outside"].n_to  # to foyer
+        print(char_room)
+        foyer_room()
+    elif new_room == "q":
+        quit()
+    else:
+        while new_room != "n":
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            if new_room == "n":
+                char_room = room["outside"].n_to  # to foyer
+                print(char_room)
+                foyer_room()
+            elif new_room == "q":
+                quit()
+
+def foyer_room():
+    char_room = room["foyer"]
+    print(char_room)
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    if new_room == "n":
+        char_room = room["foyer"].n_to  # to overlook
+        print(char_room)
+        overlook_room()
+    elif new_room == "s":
+        char_room = room["foyer"].s_to  # to outside
+        print(char_room)
+        outside_room()
+    elif new_room == "e":
+        char_room = room["foyer"].e_to  # to narrow
+        print(char_room)
+        narrow_room()
+    elif new_room == "q":
+        quit()
+    else:
+        while new_room != "n" or new_room != "s" or new_room != "e":
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            if new_room == "n":
+                char_room = room["foyer"].n_to  # to overlook
+                print(char_room)
+                overlook_room()
+            elif new_room == "s":
+                char_room = room["foyer"].s_to  # to outside
+                print(char_room)
+                outside_room()
+            elif new_room == "e":
+                char_room = room["foyer"].e_to  # to narrow
+                print(char_room)
+                narrow_room()
+            elif new_room == "q":
+                quit()
+
+def overlook_room():
+    char_room = room["overlook"]
+    print(char_room)
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    if new_room == "s":
+        char_room = room["overlook"].s_to  # to foyer
+        print(char_room)
+        overlook_room()
+    elif new_room == "q":
+        quit()
+    else:
+        while new_room != "s":
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            if new_room == "s":
+                char_room = room["overlook"].s_to  # to foyer
+                print(char_room)
+                overlook_room()
+            elif new_room == "q":
+                quit()
+
+def narrow_room():
+    char_room = room["narrow"]
+    print(char_room)
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    if new_room == "w":
+        char_room = room["narrow"].w_to  # to foyer
+        print(char_room)
+        foyer_room()
+    elif new_room == "n":
+        char_room = room["narrow"].n_to  # to treasure
+        print(char_room)
+        treasure_room()
+    elif new_room == "q":
+        quit()
+    else:
+        while new_room != "n" or new_room != "w":
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            if new_room == "w":
+                char_room = room["narrow"].w_to  # to foyer
+                print(char_room)
+                foyer_room()
+            elif new_room == "n":
+                char_room = room["narrow"].n_to  # to treasure
+                print(char_room)
+                treasure_room()
+            elif new_room == "q":
+                quit()
+
+def treasure_room():
+    char_room = room["treasure"]
+    print(char_room)
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    if new_room == "s":
+        char_room = room["treasure"].s_to  # to narrow
+        print(char_room)
+        narrow_room()
+    elif new_room == "q":
+        quit()
+    else:
+        while new_room != "s":
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            if new_room == "s":
+                char_room = room["treasure"].s_to  # to narrow
+                print(char_room)
+                narrow_room()
+            elif new_room == "q":
+                break
+
 while True:
     play = input("Would you like to play a game? ( y / n ) ")
 
     if play.lower().strip() == "y":
+
         char_name = input("Please enter a name for your character: ").strip()
+
         room_number = input("""Please enter a room number (1 - 5) to enter:
         1. Outside
         2. Foyer
-        3. Overlooky
+        3. Overlook
         4. Narrow
         5. Treasure
         """).lower().strip()
+
         print(Player(char_name))
+
         if room_number == "1":
-            char_room = room["outside"]
-            print(char_room)
-            new_room = input("Go [n]orth [s]outh [e]ast [west]").lower().strip()
-            if new_room == "n":
-                char_room = room["outside"].n_to  # foyer
-                print(char_room)
-            else:
-                while new_room != "n":
-                    new_room = input("Go [n]orth [s]outh [e]ast [west]").lower().strip()
-                    if new_room == "n":
-                        char_room = room["outside"].n_to  # foyer
-                        print(char_room)
+            outside_room()
+
         elif room_number == "2":
-            char_room = room["foyer"]
-            print(char_room)
-            new_room = input("""
-        Please select a room number to enter from 1 - 3:
-        1. Outsidey
-        2. Overlook
-        3. Narrow
-            """)
-            if new_room == "1":
-                char_room = room['foyer'].s_to # to outside
-                print(char_room)
-            elif new_room == "2":
-                char_room = room['foyer'].n_to # to overlook
-                print(char_room)
+            foyer_room()
+
         elif room_number == "3":
-            print(room["overlook"])
+            overlook_room()
+
         elif room_number == "4":
-            print(room["narrow"])
+            narrow_room()
+
         elif room_number == "5":
-            print(room["treasure"])
+            treasure_room()
+
         else:
             print("Not a valid choice")
+
     else: 
         print("Thank you for playing.")
         break
