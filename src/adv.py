@@ -42,19 +42,17 @@ def quit():
 def outside_room():
     char_room = room["outside"]
     print(char_room)
-    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
     if new_room == "n":
         char_room = room["outside"].n_to  # to foyer
-        print(char_room)
         foyer_room()
     elif new_room == "q":
         quit()
     else:
         while new_room != "n":
-            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
             if new_room == "n":
                 char_room = room["outside"].n_to  # to foyer
-                print(char_room)
                 foyer_room()
             elif new_room == "q":
                 quit()
@@ -62,35 +60,29 @@ def outside_room():
 def foyer_room():
     char_room = room["foyer"]
     print(char_room)
-    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
     if new_room == "n":
         char_room = room["foyer"].n_to  # to overlook
-        print(char_room)
         overlook_room()
     elif new_room == "s":
         char_room = room["foyer"].s_to  # to outside
-        print(char_room)
         outside_room()
     elif new_room == "e":
         char_room = room["foyer"].e_to  # to narrow
-        print(char_room)
         narrow_room()
     elif new_room == "q":
         quit()
     else:
         while new_room != "n" or new_room != "s" or new_room != "e":
-            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
             if new_room == "n":
                 char_room = room["foyer"].n_to  # to overlook
-                print(char_room)
                 overlook_room()
             elif new_room == "s":
                 char_room = room["foyer"].s_to  # to outside
-                print(char_room)
                 outside_room()
             elif new_room == "e":
                 char_room = room["foyer"].e_to  # to narrow
-                print(char_room)
                 narrow_room()
             elif new_room == "q":
                 quit()
@@ -98,19 +90,17 @@ def foyer_room():
 def overlook_room():
     char_room = room["overlook"]
     print(char_room)
-    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
     if new_room == "s":
         char_room = room["overlook"].s_to  # to foyer
-        print(char_room)
         overlook_room()
     elif new_room == "q":
         quit()
     else:
         while new_room != "s":
-            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
             if new_room == "s":
                 char_room = room["overlook"].s_to  # to foyer
-                print(char_room)
                 overlook_room()
             elif new_room == "q":
                 quit()
@@ -118,27 +108,23 @@ def overlook_room():
 def narrow_room():
     char_room = room["narrow"]
     print(char_room)
-    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
     if new_room == "w":
         char_room = room["narrow"].w_to  # to foyer
-        print(char_room)
         foyer_room()
     elif new_room == "n":
         char_room = room["narrow"].n_to  # to treasure
-        print(char_room)
         treasure_room()
     elif new_room == "q":
         quit()
     else:
         while new_room != "n" or new_room != "w":
-            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
             if new_room == "w":
                 char_room = room["narrow"].w_to  # to foyer
-                print(char_room)
                 foyer_room()
             elif new_room == "n":
                 char_room = room["narrow"].n_to  # to treasure
-                print(char_room)
                 treasure_room()
             elif new_room == "q":
                 quit()
@@ -146,25 +132,23 @@ def narrow_room():
 def treasure_room():
     char_room = room["treasure"]
     print(char_room)
-    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+    new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
     if new_room == "s":
         char_room = room["treasure"].s_to  # to narrow
-        print(char_room)
         narrow_room()
     elif new_room == "q":
         quit()
     else:
         while new_room != "s":
-            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit").lower().strip()
+            new_room = input("Go [n]orth [s]outh [e]ast [west] [q]uit: ").lower().strip()
             if new_room == "s":
                 char_room = room["treasure"].s_to  # to narrow
-                print(char_room)
                 narrow_room()
             elif new_room == "q":
                 break
 
 while True:
-    play = input("Would you like to play a game? ( y / n ) ")
+    play = input("Would you like to play a game? (y/n) ")
 
     if play.lower().strip() == "y":
 
